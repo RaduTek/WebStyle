@@ -5,172 +5,224 @@
         <meta charset="utf-8" />
         <script language="javascript" src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
         <script language="javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+        <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
         <script language="javascript" src="js/script.js"></script>
         <link rel="stylesheet" href="css/style.css" />
         <title>Application Name</title>
     </head>
-    <body onload="bodyOnLoad()">
-        <div class="navbar centered">
+    <body onload="bodyOnLoad()" class="globals light centered has-navbar">
+        <div class="navbar">
             <div class="nav-inner">
                 <div class="nav-title">
-                    <iconify-icon icon="ic:twotone-dashboard" width="30"></iconify-icon>
-                    <span class="f-bold">Application</span>
-                    <span>Name</span>
+                    <a href="#">
+                        <iconify-icon icon="ic:twotone-dashboard" width="30"></iconify-icon>
+                        <span class="f-bold">Application</span>
+                        <span>Name</span>
+                    </a>
                 </div>
                 <div class="nav-links">
                     <a href="#">
-                        <iconify-icon icon="ic:twotone-explore" width="18"></iconify-icon>
+                        <iconify-icon icon="ic:twotone-explore"></iconify-icon>
                         <label>Nav Link 1</label>
                     </a>
                     <a href="#">
-                        <iconify-icon icon="ic:twotone-feedback" width="18"></iconify-icon>
+                        <iconify-icon icon="ic:twotone-feedback"></iconify-icon>
                         <label>Nav Link 2</label>
+                    </a>
+                    <a class="action_toggle_theme">
+                        <iconify-icon icon="icon-park-twotone:dark-mode"></iconify-icon>
+                        <label>Switch Theme</label>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="content has-navbar centered">
-            <div class="section left">
-                <div class="sub-wrap collapsible">
-                    <div class="sub-head">
-                        Header
-                    </div>
-                    <div class="sub has-head sub-list">
-                        <div class="list-box">
-                            <span class="list-item">Item 1</span>
-                            <a href="#" class="list-item">Item 2</a>
-                            <span class="list-item">Item 3</span>
-                            <a href="#" class="list-item">Item 4</a>
-                            <a href="#" class="list-item">Item 5</a>
+        <div class="content-wrap">
+            <div class="content has-navbar centered">
+                <div class="section left">
+                    <div class="sub-wrap collapsible collapsed">
+                        <div class="sub-head">
+                            <iconify-icon icon="ic:twotone-explore"></iconify-icon>
+                            <label>Header Text</label>
                         </div>
-                        <div class="field al-right">
-                            <button class="button small">More</button>
+                        <div class="sub has-head sub-list">
+                            <div class="list-box striped">
+                                <span class="list-item">Item 1</span>
+                                <a href="#" class="list-item">Item 2</a>
+                                <span class="list-item">Item 3</span>
+                                <a href="#" class="list-item">Item 4</a>
+                                <a href="#" class="list-item">Item 5</a>
+                            </div>
+                            <div class="field al-right">
+                                <button class="button small">More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sub-wrap collapsible collapsed">
+                        <div class="sub-head">
+                            <iconify-icon icon="ic:twotone-explore"></iconify-icon>
+                            <label>Header Text 2</label>
+                        </div>
+                        <div class="sub has-head sub-list">
+                            <div class="list-box">
+                                <span class="list-item">Item 1</span>
+                                <a href="#" class="list-item">Item 2</a>
+                                <span class="list-item">Item 3</span>
+                                <a href="#" class="list-item">Item 4</a>
+                                <a href="#" class="list-item">Item 5</a>
+                            </div>
+                            <div class="field al-right">
+                                <button class="button small">More</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="sub-wrap collapsible">
-                    <div class="sub-head">
-                        Header
-                    </div>
-                    <div class="sub has-head sub-list">
-                        <div class="list-box">
-                            <span class="list-item">Item 1</span>
-                            <a href="#" class="list-item">Item 2</a>
-                            <span class="list-item">Item 3</span>
-                            <a href="#" class="list-item">Item 4</a>
-                            <a href="#" class="list-item">Item 5</a>
+                <div class="section main">
+                    <div class="sub-wrap collapsible collapsed">
+                        <div class="sub-head-fit">
+                            <iconify-icon icon="ic:twotone-explore"></iconify-icon>
+                            <label>Header Text 2</label>
                         </div>
-                        <div class="field al-right">
-                            <button class="button small">More</button>
+                        <div class="sub">
+                            <div class="field">
+                                <button class="button">Test button</button>
+                                <button class="button gray">Test button</button>
+                                <input class="input" type="text" />
+                            </div>
+                            <div class="sub-split"></div>
+                            <div class="field">
+                                <textarea class="input">Textarea field</textarea>
+                            </div>
+                            <div class="sub-split"></div>
+                            <div class="field">
+                                <select class="select">
+                                    <option>a</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <button id="btn1" class="button blue">Toggle sub2</button>
+                        <button id="btn2" class="button green">Expand sub2</button>
+                        <button id="btn3" class="button red">Collapse sub2</button>
+                        <script>
+                            $("#btn1").click(function() {
+                                toggleSub($("#sub2"));
+                            });
+                            $("#btn2").click(function() {
+                                expandSub($("#sub2"));
+                            });
+                            $("#btn3").click(function() {
+                                collapseSub($("#sub2"));
+                            });
+                        </script>
+                    </div>
+                    <div id="sub2"s class="sub-wrap collapsible collapsed">
+                        <div class="sub-head-fit">
+                            <label>Subdivision 2</label>
+                        </div>
+                        <div class="sub no-padding">
+                            <table class="table hinted striped width-100">
+                                <thead>
+                                    <tr>
+                                        <th>Nume</th>
+                                        <th>Prenume</th>
+                                        <th>Clasa</th>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td class="cl-red">a</td>
+                                    <td>b</td>
+                                    <td>c</td>
+                                </tr>
+                                <tr>
+                                    <td class="cl-green">a</td>
+                                    <td>b</td>
+                                    <td>c</td>
+                                </tr>
+                                <tr class="cl-blue">
+                                    <td>a</td>
+                                    <td>b</td>
+                                    <td>c</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="sub-foot-fit">
+                            <button class="button green">
+                                <iconify-icon icon="ic:baseline-save"></iconify-icon>
+                                Action 1
+                            </button>
+                            <button class="button blue">
+                                <iconify-icon icon="ic:baseline-search"></iconify-icon>
+                                Action 2
+                            </button>
+                            <button class="button red">
+                                <iconify-icon icon="ic:baseline-delete-forever"></iconify-icon>
+                                Action 3
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sub-wrap">
+                        <div class="sub-head">Header 2</div>
+                        <div class="sub no-padding">
+                            <table class="table hover-hint width-100">
+                                <thead>
+                                    <tr>
+                                        <th>Nume</th>
+                                        <th>Prenume</th>
+                                        <th>Clasa</th>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td class="cl-red">a</td>
+                                    <td>b</td>
+                                    <td>c</td>
+                                </tr>
+                                <tr>
+                                    <td class="cl-green">a</td>
+                                    <td>b</td>
+                                    <td>c</td>
+                                </tr>
+                                <tr class="cl-blue">
+                                    <td>a</td>
+                                    <td>b</td>
+                                    <td>c</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="sub-foot">
+                            <button class="button green">
+                                <iconify-icon icon="ic:baseline-save"></iconify-icon>
+                                Action 1
+                            </button>
+                            <button class="button blue">
+                                <iconify-icon icon="ic:baseline-search"></iconify-icon>
+                                Action 2
+                            </button>
+                            <button class="button red">
+                                <iconify-icon icon="ic:baseline-delete-forever"></iconify-icon>
+                                Action 3
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="section main">
-                <div class="sub-wrap collapsible">
-                    <div class="sub-head-fit">Header</div>
-                    <div class="sub">
-                        <div class="field">
-                            <button class="button">Test button</button>
-                            <input class="input" type="text" />
-                        </div>
-                        <div class="sub-split"></div>
-                        <div class="field">
-                            <textarea class="input">Textarea field</textarea>
-                        </div>
-                        <div class="sub-split"></div>
-                        <div class="field">
-                            <select class="select">
-                                <option>a</option>
-                            </select>
-                        </div>
-                    </div>
+        </div>
+        <div class="footer-wrap">
+            <div class="footer">
+                <div class="panel">
+                    <h2>Text</h2>
+                    <p>Text row 1</p>
+                    <p>Text row 2</p>
                 </div>
-                <div class="sub-wrap collapsible">
-                    <div class="sub-head-fit">Header 2</div>
-                    <div class="sub no-padding">
-                        <table class="table hover-hint width-100">
-                            <thead>
-                                <tr>
-                                    <th>Nume</th>
-                                    <th>Prenume</th>
-                                    <th>Clasa</th>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td class="cl-red">a</td>
-                                <td>b</td>
-                                <td>c</td>
-                            </tr>
-                            <tr>
-                                <td class="cl-green">a</td>
-                                <td>b</td>
-                                <td>c</td>
-                            </tr>
-                            <tr class="cl-blue">
-                                <td>a</td>
-                                <td>b</td>
-                                <td>c</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="sub-foot-fit">
-                        <button class="button green">
-                            <iconify-icon icon="ic:baseline-save"></iconify-icon>
-                            Action 1
-                        </button>
-                        <button class="button blue">
-                            <iconify-icon icon="ic:baseline-search"></iconify-icon>
-                            Action 2
-                        </button>
-                        <button class="button red">
-                            <iconify-icon icon="ic:baseline-delete-forever"></iconify-icon>
-                            Action 3
-                        </button>
-                    </div>
+                <div class="panel">
+                    <h2>Text</h2>
+                    <p>Text row 1</p>
+                    <p>Text row 2</p>
                 </div>
-                <div class="sub-wrap">
-                    <div class="sub-head">Header 2</div>
-                    <div class="sub no-padding">
-                        <table class="table hover-hint width-100">
-                            <thead>
-                                <tr>
-                                    <th>Nume</th>
-                                    <th>Prenume</th>
-                                    <th>Clasa</th>
-                                </tr>
-                            </thead>
-                            <tr>
-                                <td class="cl-red">a</td>
-                                <td>b</td>
-                                <td>c</td>
-                            </tr>
-                            <tr>
-                                <td class="cl-green">a</td>
-                                <td>b</td>
-                                <td>c</td>
-                            </tr>
-                            <tr class="cl-blue">
-                                <td>a</td>
-                                <td>b</td>
-                                <td>c</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="sub-foot">
-                        <button class="button green">
-                            <iconify-icon icon="ic:baseline-save"></iconify-icon>
-                            Action 1
-                        </button>
-                        <button class="button blue">
-                            <iconify-icon icon="ic:baseline-search"></iconify-icon>
-                            Action 2
-                        </button>
-                        <button class="button red">
-                            <iconify-icon icon="ic:baseline-delete-forever"></iconify-icon>
-                            Action 3
-                        </button>
-                    </div>
+                <div class="panel">
+                    <h2>Text</h2>
+                    <p>Text row 1</p>
+                    <p>Text row 2</p>
                 </div>
             </div>
         </div>
