@@ -8,9 +8,18 @@
         <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
         <script language="javascript" src="js/script.js"></script>
         <link rel="stylesheet" href="css/style.css" />
+        <noscript>
+            <!-- Override dark mode flashing fix for when JS is disabled -->
+            <style>
+                body {
+                    visibility: unset;
+                    opacity: unset;
+                }
+            </style>
+        </noscript>
         <title>Application Name</title>
     </head>
-    <body onload="bodyOnLoad()" class="globals light centered has-navbar">
+    <body onload="bodyOnLoad()" class="globals centered has-navbar disable-transitions">
         <div class="navbar">
             <div class="nav-inner">
                 <div class="nav-title">
@@ -39,7 +48,7 @@
         <div class="content-wrap">
             <div class="content has-navbar centered">
                 <div class="section left">
-                    <div class="sub-wrap collapsible collapsed">
+                    <div class="sub-wrap collapsible">
                         <div class="sub-head">
                             <iconify-icon icon="ic:twotone-explore"></iconify-icon>
                             <label>Header Text</label>
@@ -106,17 +115,17 @@
                         <button id="btn3" class="button red">Collapse sub2</button>
                         <script>
                             $("#btn1").click(function() {
-                                toggleSub($("#sub2"));
+                                subToggle($("#sub2"));
                             });
                             $("#btn2").click(function() {
-                                expandSub($("#sub2"));
+                                subExpand($("#sub2"));
                             });
                             $("#btn3").click(function() {
-                                collapseSub($("#sub2"));
+                                subCollapse($("#sub2"));
                             });
                         </script>
                     </div>
-                    <div id="sub2"s class="sub-wrap collapsible collapsed">
+                    <div id="sub2"s class="sub-wrap collapsible">
                         <div class="sub-head-fit">
                             <label>Subdivision 2</label>
                         </div>

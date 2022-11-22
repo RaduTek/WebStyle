@@ -153,8 +153,8 @@
 
 @font-face {
     font-family: 'Segoe UI Variable';
-    src: url('font/SegoeUIVariable.woff2') format('woff2'),
-        url('font/SegoeUIVariable.woff') format('woff');
+    src: url('../font/SegoeUIVariable.woff2') format('woff2'),
+        url('../font/SegoeUIVariable.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -188,6 +188,11 @@
 /* #region Body and Scrollbar */
 
 body {
+    /* Hide the body element to prevent white flashing when using the dark theme */
+    /* We use javascript to restore these back to initial values */
+    visibility: hidden;
+    opacity: 0;
+
     margin: 0;
     padding: 0;
     font-family: var(--font-family);
@@ -702,6 +707,11 @@ a {
     /* #endregion */
 
 /* #endregion */
+
+.disable-transitions,
+.disable-transitions * {
+    transition: none !important;
+}
 
 /* #region Responsive Mobile Styles */
 

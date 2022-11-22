@@ -12,6 +12,13 @@ function subExpand(sub) {
     sub.removeClass('collapsed');
 }
 
+function subToggle2(sub) {
+    sub.children('.sub').slideToggle();
+    sub.children('.sub-foot').slideToggle();
+    sub.children('.sub-foot-fit').slideToggle();
+    sub.toggleClass('collapsed');
+}
+
 function subToggle(sub) {
     if (sub.hasClass('collapsed')) {
         subExpand(sub);
@@ -19,6 +26,8 @@ function subToggle(sub) {
         subCollapse(sub);
     }
 }
+
+
 
 function subInit(sub) {
     if (sub.has('.sub-head').length > 0) {
@@ -34,6 +43,10 @@ function subInit(sub) {
         sub.children('.sub').addClass('has-foot-fit');
     }
     if (sub.hasClass('collapsible')) {
+        if (!sub.hasClass('collapsed')) {
+            subToggle2(sub);
+            subExpand(sub);
+        }
         if (sub.has('.sub-head').length > 0) {
             var sub_head = sub.children('.sub-head');
             sub_head.append('<iconify-icon class="sub-collapse-icon" icon="ic:baseline-arrow-back-ios-new"></iconify-icon>');
@@ -61,25 +74,26 @@ function themeLight() {
         themeVal = 'light';
         $.cookie('theme', themeVal);
     }
-    $('.globals').removeClass('dark');
-    $('.globals').addClass('light');
+    $('body').removeClass('dark');
+    $('body').addClass('light');
 }
+
 function themeDark() {
     if (themeVal != 'dark') {
         themeVal = 'dark';
         $.cookie('theme', themeVal);
     }
-    $('.globals').removeClass('light');
-    $('.globals').addClass('dark');
+    $('body').removeClass('light');
+    $('body').addClass('dark');
 }
 
 function themeToggle() {
-    if (themeVal == 'dark') themeLight();
-    if (themeVal == 'light') themeDark();
+    if (themeVal === 'dark') themeLight();
+    else if (themeVal === 'light') themeDark();
 }
 
 function themeInit() {
-    $('.action_toggle_theme').click(themeToggle);
+    // Disable theme transition to prevent white flashes
     themeVal = $.cookie('theme');
     if (themeVal) {
         if (themeVal == 'dark') themeDark();
@@ -88,6 +102,15 @@ function themeInit() {
         themeVal = 'light';
         $.cookie('theme', themeVal);
     }
+    setTimeout(function() {
+        $('body').removeClass('disable-transitions');
+    }, 100);
+
+    $('body').css('visibility', 'unset');
+    $('body').css('opacity', 'unset');
+
+    // Give toggle theme button action
+    $('.action_toggle_theme').on('click', themeToggle);
 }
 
 function bodyOnLoad() {
